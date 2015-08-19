@@ -1,0 +1,230 @@
+---
+  $schema: "http://json-schema.org/draft-04/schema#"
+  id: "job_definition"
+  type: "object"
+  properties:
+    project:
+      id: "project"
+      type: "string"
+      minLength: 1
+    job:
+      id: "job"
+      type: "object"
+      properties:
+        end_timestamp:
+          id: "end_timestamp"
+          type: "integer"
+        submit_timestamp:
+          id: "submit_timestamp"
+          type: "integer"
+        start_timestamp:
+          id: "start_timestamp"
+          type: "integer"
+        build_url:
+          id: "build_url"
+          type: "string"
+          minLength: 1
+        name:
+          id: "name"
+          type: "string"
+          minLength: 1
+        option_collection:
+          id: "option_collection"
+          type: "object"
+          properties:
+            opt:
+              id: "opt"
+              type: "boolean"
+          required:
+            - opt
+        artifacts:
+          id: "artifacts"
+          type: "array"
+          items:
+            id: "0"
+            type: "object"
+            properties:
+              job_guid:
+                id: "job_guid"
+                type: "string"
+                minLength: 1
+              type:
+                id: "type"
+                type: "string"
+                minLength: 1
+              name:
+                id: "name"
+                type: "string"
+                minLength: 1
+              blob:
+                id: "blob"
+                type: "string"
+                minLength: 1
+          required:
+            - type
+            - name
+            - blob
+        machine_platform:
+          id: "machine_platform"
+          type: "object"
+          properties:
+            platform:
+              id: "platform"
+              type: "string"
+              minLength: 1
+            os_name:
+              id: "os_name"
+              type: "string"
+              minLength: 1
+            architecture:
+              id: "architecture"
+              type: "string"
+              minLength: 1
+          required:
+            - platform
+            - os_name
+            - architecture
+        who:
+          id: "who"
+          type: "string"
+          minLength: 1
+        group_symbol:
+          id: "group_symbol"
+          type: "string"
+          minLength: 1
+        reason:
+          id: "reason"
+          type: "string"
+          minLength: 1
+        group_name:
+          id: "group_name"
+          type: "string"
+          minLength: 1
+        machine:
+          id: "machine"
+          type: "string"
+          minLength: 1
+        state:
+          id: "state"
+          type: "string"
+          minLength: 1
+          enum:
+            - pending
+            - running
+            - completed
+            - coalesced
+        log_references:
+          id: "log_references"
+          type: "array"
+          items:
+            id: "0"
+            type: "object"
+            properties:
+              url:
+                id: "url"
+                type: "string"
+                minLength: 1
+              parse_status:
+                id: "parse_status"
+                type: "string"
+                minLength: 1
+                enum:
+                  - pending
+                  - parsed
+                  - error
+              name:
+                id: "name"
+                type: "string"
+                minLength: 1
+            required:
+              - url
+              - name
+        result:
+          id: "result"
+          type: "string"
+          minLength: 1
+          enum:
+            - unknown
+            - success
+            - testfailed
+            - busted
+            - skipped
+            - exception
+            - retry
+            - usercancel
+        build_platform:
+          id: "build_platform"
+          type: "object"
+          properties:
+            platform:
+              id: "platform"
+              type: "string"
+              minLength: 1
+            os_name:
+              id: "os_name"
+              type: "string"
+              minLength: 1
+            architecture:
+              id: "architecture"
+              type: "string"
+              minLength: 1
+          required:
+            - platform
+            - os_name
+            - architecture
+        job_symbol:
+          id: "job_symbol"
+          type: "string"
+          minLength: 1
+        job_guid:
+         id: "job_guid"
+          type: "string"
+          minLength: 1
+        product_name:
+          id: "product_name"
+          type: "string"
+          minLength: 1
+        desc:
+          id: "desc"
+          type: "string"
+          minLength: 1
+      required:
+        - name
+        - job_guid
+        - job_symbol
+        - group_name
+        - group_symbol
+        - state
+        - machine_platform
+        - build_platform
+        - who
+        - reason
+        - submit_timestamp
+    resultset:
+      id: "resultset"
+      type: "object"
+      properties:
+        revision_hash:
+          id: "revision_hash"
+          type: "string"
+          minLength: 1
+        author:
+          id: "author"
+          type: "string"
+          minLength: 1
+        push_timestamp:
+          id: "push_timestamp"
+          type: "string"
+          minLength: 1
+      required:
+        - revision_hash
+        - author
+        - push_timestamp
+    coalesced:
+      id: "coalesced"
+      type: "array"
+      items: []
+  required:
+    - project
+    - job
+    - resultset
